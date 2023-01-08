@@ -1,4 +1,4 @@
-module github.com/KapitanD/http-api-server
+module github.com/Goddest/tpos-kuber
 
 go 1.13
 

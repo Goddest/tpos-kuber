@@ -2,11 +2,8 @@ package model
 
 import (
 	"time"
-
 	validation "github.com/go-ozzo/ozzo-validation"
 )
-
-// Note ...
 type Note struct {
 	ID        int       `json:"id"`
 	AuthorID  int       `json:"author_id"`
@@ -15,8 +12,6 @@ type Note struct {
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
-
-// Validate ...
 func (n *Note) Validate() error {
 	return validation.ValidateStruct(
 		n,
@@ -24,8 +19,6 @@ func (n *Note) Validate() error {
 		validation.Field(&n.Body, validation.Required, validation.Length(1, 1000)),
 	)
 }
-
-// ValidateUpdate ...
 func (n *Note) ValidateUpdate() error {
 	return validation.ValidateStruct(
 		n,

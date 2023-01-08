@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: http-api-server
-        image: docker.io/kapitand/apiserver:0.0.2
+        image: docker.io/goddest/tpos-kuber:0.1
         imagePullPolicy: Always
         env:
           - name: POSTGRES_DB

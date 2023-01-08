@@ -2,11 +2,9 @@ package model_test
 
 import (
 	"testing"
-
-	"github.com/KapitanD/http-api-server/internal/app/model"
+	"github.com/Goddest/tpos-kuber/internal/app/model"
 	"github.com/stretchr/testify/assert"
 )
-
 func TestNote_Validate(t *testing.T) {
 	testCases := []struct {
 		name    string
@@ -53,7 +51,6 @@ func TestNote_Validate(t *testing.T) {
 			isValid: false,
 		},
 	}
-
 	for _, tc := range testCases {
 		if tc.isValid {
 			assert.NoError(t, tc.n().Validate())

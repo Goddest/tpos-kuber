@@ -1,8 +1,8 @@
-PROJECT?=github.com/KapitanD/http-api-server
+PROJECT?=github.com/Goddest/tpos-kuber
 APP?=apiserver
 PORT?=8090
 USER?=kapitand
-CONTAINER_IMAGE?=docker.io/kapitand/${APP}
+CONTAINER_IMAGE?=docker.io/goddest/tpos-kuber
 
 GOOS?=linux
 GOARCH?=amd64

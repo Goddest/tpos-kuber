@@ -3,16 +3,12 @@ package sqlstore
 import (
 	"database/sql"
 
-	"github.com/KapitanD/http-api-server/internal/app/model"
-	"github.com/KapitanD/http-api-server/internal/app/store"
+	"github.com/Goddest/tpos-kuber/internal/app/model"
+	"github.com/Goddest/tpos-kuber/internal/app/store"
 )
-
-// UserRepository ...
 type UserRepository struct {
 	store *Store
 }
-
-// Create ...
 func (r *UserRepository) Create(u *model.User) error {
 	if err := u.Validate(); err != nil {
 		return err
@@ -29,8 +25,6 @@ func (r *UserRepository) Create(u *model.User) error {
 	).Scan(&u.ID)
 
 }
-
-// FindByEmail ...
 func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 	u := &model.User{}
 	if err := r.store.db.QueryRow(
@@ -48,8 +42,6 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 	}
 	return u, nil
 }
-
-// Find ...
 func (r *UserRepository) Find(id int) (*model.User, error) {
 	u := &model.User{}
 	if err := r.store.db.QueryRow(

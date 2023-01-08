@@ -7,19 +7,16 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
-
-	"github.com/KapitanD/http-api-server/internal/app/model"
-	"github.com/KapitanD/http-api-server/internal/app/store/teststore"
+	"github.com/Goddest/tpos-kuber/internal/app/model"
+	"github.com/Goddest/tpos-kuber/internal/app/store/teststore"
 	"github.com/gorilla/securecookie"
 	"github.com/gorilla/sessions"
 	"github.com/stretchr/testify/assert"
 )
-
 func TestServer_AuthenticateUser(t *testing.T) {
 	store := teststore.New()
 	u := model.TestUser(t)
 	store.User().Create(u)
-
 	testCases := []struct {
 		name         string
 		cookieValue  map[interface{}]interface{}
@@ -38,14 +35,12 @@ func TestServer_AuthenticateUser(t *testing.T) {
 			expectedCode: http.StatusUnauthorized,
 		},
 	}
-
 	secretKey := []byte("secret")
 	s := newServer(store, sessions.NewCookieStore(secretKey))
 	sc := securecookie.New(secretKey, nil)
 	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
-
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			rec := httptest.NewRecorder()
@@ -57,7 +52,6 @@ func TestServer_AuthenticateUser(t *testing.T) {
 		})
 	}
 }
-
 func TestServer_HandleUserCreate(t *testing.T) {
 	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
 	testCases := []struct {
@@ -98,7 +92,6 @@ func TestServer_HandleUserCreate(t *testing.T) {
 		})
 	}
 }
-
 func TestServer_HandleSessionCreate(t *testing.T) {
 	u := model.TestUser(t)
 	store := teststore.New()
@@ -139,7 +132,6 @@ func TestServer_HandleSessionCreate(t *testing.T) {
 			expectedCode: http.StatusUnauthorized,
 		},
 	}
-
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			rec := httptest.NewRecorder()
@@ -151,7 +143,6 @@ func TestServer_HandleSessionCreate(t *testing.T) {
 		})
 	}
 }
-
 func TestServer_HandleNotesCreate(t *testing.T) {
 	s := newServer(teststore.New(), sessions.NewCookieStore([]byte("secret")))
 	testCases := []struct {
@@ -180,7 +171,6 @@ func TestServer_HandleNotesCreate(t *testing.T) {
 			expectedCode: http.StatusUnprocessableEntity,
 		},
 	}
-
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			rec := httptest.NewRecorder()
